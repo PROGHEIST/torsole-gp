@@ -1,0 +1,1 @@
+- [x] Add sticky classes to navbar nav element in navbar.html
