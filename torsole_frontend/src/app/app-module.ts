@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Footer } from './components/footer/footer';
 import { Home } from './home/home';
 import { Slideshow } from './components/slideshow/slideshow';
+import { GpBodies } from './components/gp-bodies/gp-bodies';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { Slideshow } from './components/slideshow/slideshow';
     Navbar,
     Footer,
     Home,
-    Slideshow
+    Slideshow,
+    GpBodies
   ],
   imports: [
     BrowserModule,

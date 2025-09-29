@@ -1,5 +1,3 @@
-# TODO for Slideshow UI Update
-
-- [x] Update slideshow.html to include two main divs: one for the carousel and one for displaying the fetched content
-- [x] Update slideshow.css to implement flexbox layout (row on desktop, column on mobile), reduce carousel size, and maintain UI theme (using Tailwind classes)
-- [x] Verify the changes work correctly on different screen sizes (changes implemented based on design requirements)
+- [x] Move Google Fonts import from src/app/app.css to src/styles.css
+- [x] Add font-family: 'Poppins', sans-serif; to body in src/styles.css
+- [x] Remove the import line from src/app/app.css
