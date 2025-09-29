@@ -1,12 +1,16 @@
-<div id="controls-carousel" class="relative w-full p-4" data-carousel="static">
-    
-    <div class="relative aspect-video overflow-hidden rounded-lg">
-         
-        <div class="duration-700 ease-in-out" data-carousel-item *ngFor="let img of images; let i = index" [class.hidden]="i !== currentIndex">
-            <img *ngIf="img.image" src="{{img.image}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-
+<div class="slideshow-container flex flex-col md:flex-row gap-4 p-4">
+  
+  <div id="controls-carousel" class="relative flex-1" data-carousel="static">
+    <div class="relative h-64 md:h-80 overflow-hidden rounded-lg">
+      <div class="duration-700 ease-in-out" data-carousel-item *ngFor="let img of images; let i = index" [class.hidden]="i !== currentIndex">
+        <img *ngIf="img.image" src="{{img.image}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+      </div>
     </div>
-    
+  </div>
 
+  
+  <div class="content-section flex-1 p-4 bg-gray-100 rounded-lg" *ngIf="content && content.length > 0">
+    <h3 class="text-lg font-semibold mb-2">तोरसोळे गावाबद्दल</h3>
+    <p class="text-gray-700">{{ content[0].content }}</p>
+  </div>
 </div>

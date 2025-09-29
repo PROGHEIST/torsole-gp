@@ -13,11 +13,15 @@ export class Api {
   constructor(private http: HttpClient) {}
 
   getAppData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/gpinfo`)
+    return this.http.get<any>(`${this.apiUrl}/gpinfo`);
   }
 
   getCarosoulData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/slideshow`)
+    return this.http.get<any>(`${this.apiUrl}/slideshow`);
+  }
+
+  getAboutVillageData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/about-village`);
   }
   
 }

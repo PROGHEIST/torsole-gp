@@ -14,6 +14,7 @@ export class Slideshow implements OnInit, OnDestroy{
   currentIndex: number = 0;
   private interval: any;
   private touchStartX: number = 0;
+  content: any[] = [];
 
   constructor(public api: Api, private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
@@ -30,6 +31,16 @@ export class Slideshow implements OnInit, OnDestroy{
       (err) => {
         console.log("error fetching images", err);
       });
+
+    this.api.getAboutVillageData().subscribe(
+      (data) => {
+        this.content = data;
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        console.log("failed to fetch content", error);
+      }
+    );
   }
 
   ngOnDestroy(): void {
