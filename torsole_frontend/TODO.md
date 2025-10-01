@@ -1,3 +1,3 @@
-- [x] Move Google Fonts import from src/app/app.css to src/styles.css
-- [x] Add font-family: 'Poppins', sans-serif; to body in src/styles.css
-- [x] Remove the import line from src/app/app.css
+- [x] Add loading flag to OurMission component (our-mission.ts) and update HTML (our-mission.html) for skeleton loading
+- [ ] Add loading flag to Navbar component (navbar.ts) and update HTML (navbar.html) for skeleton loading
+- [ ] Add loading flag to Slideshow component (slideshow.ts) and update HTML (slideshow.html) for skeleton loading

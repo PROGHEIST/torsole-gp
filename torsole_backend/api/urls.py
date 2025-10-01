@@ -2,12 +2,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset
+from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset, MissionViewSet, MissionObjectivesViewSet
 
 router = routers.DefaultRouter()
 router.register('gpinfo', GramPanchayatInfoViewSet)
 router.register('slideshow', SlideShowViewSet)
 router.register('about-village', AboutVillageViewset)
+router.register('missions', MissionViewSet)
+router.register('mission-objectives', MissionObjectivesViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -15,6 +15,7 @@ export class Slideshow implements OnInit, OnDestroy{
   private interval: any;
   private touchStartX: number = 0;
   content: any[] = [];
+  loading: boolean = true;
 
   constructor(public api: Api, private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
@@ -22,7 +23,7 @@ export class Slideshow implements OnInit, OnDestroy{
     this.api.getCarosoulData().subscribe(
       (data) => {
         this.images = data;
-        console.log(this.images);
+        this.loading = false;
         this.cdr.detectChanges();
         if (this.images.length > 0) {
           this.interval = setInterval(() => this.ngZone.run(() => this.next()), 5000);
@@ -30,6 +31,7 @@ export class Slideshow implements OnInit, OnDestroy{
       },
       (err) => {
         console.log("error fetching images", err);
+        this.loading = false;
       });
 
     this.api.getAboutVillageData().subscribe(

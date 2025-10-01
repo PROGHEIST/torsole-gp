@@ -1,0 +1,21 @@
+<div *ngIf="loading" class="container mx-auto px-4 py-8">
+  <div class="mb-12">
+    <div class="h-10 bg-gray-300 rounded mb-10 animate-pulse mx-auto w-1/2"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-300 h-24 rounded-lg animate-pulse"></div>
+      <div class="bg-gray-300 h-24 rounded-lg animate-pulse"></div>
+      <div class="bg-gray-300 h-24 rounded-lg animate-pulse"></div>
+      <div class="bg-gray-300 h-24 rounded-lg animate-pulse"></div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loading" class="container mx-auto px-4 py-8">
+  <div *ngFor="let item of missions" class="mb-12">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">{{ item.heading }}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div *ngFor="let mission of item.missions" class="bg-white shadow-xl rounded-lg p-6 border-l-4 border-blue-500 hover:shadow-2xl transition-shadow duration-300">
+        <p class="text-gray-700 text-lg leading-relaxed">{{ mission.mission }}</p>
+      </div>
+    </div>
+  </div>
+</div>

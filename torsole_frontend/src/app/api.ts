@@ -23,5 +23,9 @@ export class Api {
   getAboutVillageData(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/about-village`);
   }
+
+  getMissionsData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/mission-objectives`);
+  }
   
 }

@@ -10,6 +10,8 @@ import { Footer } from './components/footer/footer';
 import { Home } from './home/home';
 import { Slideshow } from './components/slideshow/slideshow';
 import { GpBodies } from './components/gp-bodies/gp-bodies';
+import { Mission } from './mission/mission';
+import { OurMission } from './components/our-mission/our-mission';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { GpBodies } from './components/gp-bodies/gp-bodies';
     Footer,
     Home,
     Slideshow,
-    GpBodies
+    GpBodies,
+    Mission,
+    OurMission
   ],
   imports: [
     BrowserModule,

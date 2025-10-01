@@ -15,6 +15,7 @@ export class Navbar implements OnInit {
   isAboutOpen = false;
   isCitizenOpen = false;
   isRTIOpen = false;
+  loading: boolean = true;
 
   constructor(private api: Api, private cdr: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document) {}
 
@@ -23,10 +24,12 @@ export class Navbar implements OnInit {
       (data) => {
         this.appData = data;
         console.log(this.appData);
+        this.loading = false;
         this.cdr.detectChanges();
     },
       (err: any) => {
         console.log("data not fetched!", err);
+        this.loading = false;
       })
   }
 
