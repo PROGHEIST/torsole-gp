@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks
 
 class GramPanchayatInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,3 +28,7 @@ class MissionObjectivesSerializer(serializers.ModelSerializer):
         model = MissionObjectives
         fields = '__all__'
         
+class ImportantLinksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImportantLinks
+        fields = '__all__'

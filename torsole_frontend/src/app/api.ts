@@ -27,5 +27,9 @@ export class Api {
   getMissionsData(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/mission-objectives`);
   }
+
+  getImpLinksData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/important-links`)
+  }
   
 }

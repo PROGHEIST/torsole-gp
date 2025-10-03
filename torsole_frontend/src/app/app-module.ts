@@ -12,6 +12,7 @@ import { Slideshow } from './components/slideshow/slideshow';
 import { GpBodies } from './components/gp-bodies/gp-bodies';
 import { Mission } from './mission/mission';
 import { OurMission } from './components/our-mission/our-mission';
+import { ImpLinks } from './components/imp-links/imp-links';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OurMission } from './components/our-mission/our-mission';
     Slideshow,
     GpBodies,
     Mission,
-    OurMission
+    OurMission,
+    ImpLinks
   ],
   imports: [
     BrowserModule,

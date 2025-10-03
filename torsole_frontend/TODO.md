@@ -1,3 +1,2 @@
-- [x] Add loading flag to OurMission component (our-mission.ts) and update HTML (our-mission.html) for skeleton loading
-- [ ] Add loading flag to Navbar component (navbar.ts) and update HTML (navbar.html) for skeleton loading
-- [ ] Add loading flag to Slideshow component (slideshow.ts) and update HTML (slideshow.html) for skeleton loading
+- [x] Change gp-bodies background to pure white and add shadow
+- [x] Add shadow to slideshow component

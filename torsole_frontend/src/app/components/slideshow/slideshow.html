@@ -1,4 +1,4 @@
-<div class="slideshow-container flex flex-col md:flex-row gap-4 p-4">
+<div class="slideshow-container flex flex-col md:flex-row gap-4 p-4 shadow-lg">
   
   <div id="controls-carousel" class="relative flex-1" data-carousel="static">
     <div class="relative h-64 md:h-80 overflow-hidden rounded-lg">
@@ -9,7 +9,7 @@
   </div>
 
   
-  <div class="content-section flex-1 p-4 bg-gray-100 rounded-lg" *ngIf="content && content.length > 0">
+  <div class="content-section flex-1 p-4 text-dark rounded-lg" *ngIf="content && content.length > 0">
     <h3 class="text-lg font-semibold mb-2">तोरसोळे गावाबद्दल</h3>
     <p class="text-gray-700">{{ content[0].content }}</p>
   </div>
