@@ -9,3 +9,7 @@ font-family: "Kalam", cursive; */
 body {
   font-family: "Noto Sans", sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}

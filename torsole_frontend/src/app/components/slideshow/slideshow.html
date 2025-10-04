@@ -1,16 +1,77 @@
-<div class="slideshow-container flex flex-col md:flex-row gap-4 p-4 shadow-lg">
-  
-  <div id="controls-carousel" class="relative flex-1" data-carousel="static">
-    <div class="relative h-64 md:h-80 overflow-hidden rounded-lg">
-      <div class="duration-700 ease-in-out" data-carousel-item *ngFor="let img of images; let i = index" [class.hidden]="i !== currentIndex">
-        <img *ngIf="img.image" src="{{img.image}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-green-700 via-green-600 to-green-800 text-white">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-20 py-16 gap-10">
+
+    <!-- Left Content -->
+    <div class="flex-1 text-center lg:text-left">
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+        तोरसोळे ग्रामपंचायत
+      </h1>
+      <p class="text-lg md:text-xl mb-8 text-gray-100 leading-relaxed">
+        स्वच्छ गाव • सुंदर गाव • प्रगत गाव
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <a href="#about" 
+           class="bg-yellow-400 text-green-900 font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-yellow-300 transition">
+          आमच्या गावाबद्दल
+        </a>
+        <a href="#services" 
+           class="bg-white text-green-800 font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-gray-100 transition">
+          महत्त्वाच्या सेवा
+        </a>
       </div>
     </div>
-  </div>
 
-  
-  <div class="content-section flex-1 p-4 text-dark rounded-lg" *ngIf="content && content.length > 0">
-    <h3 class="text-lg font-semibold mb-2">तोरसोळे गावाबद्दल</h3>
-    <p class="text-gray-700">{{ content[0].content }}</p>
+    <!-- Right Side Image/Slideshow -->
+    <div class="flex-1 relative w-full max-w-xl h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl">
+      <div id="hero-carousel" class="relative h-full" data-carousel="static">
+        <div class="absolute inset-0 duration-700 ease-in-out" 
+             *ngFor="let img of images; let i = index" 
+             [class.hidden]="i !== currentIndex">
+          <img *ngIf="img.image" 
+               src="{{img.image}}" 
+               class="w-full h-full object-cover" 
+               alt="गावाचा फोटो">
+        </div>
+      </div>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+    </div>
+
   </div>
-</div>
+</section>
+<!-- About Village & Map Section -->
+<section id="about" class="py-16 px-6 lg:px-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+    <!-- About Section -->
+    <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col h-[28rem]">
+      <h2 class="text-2xl font-bold text-green-800 mb-4 text-center lg:text-left">
+        तोरसोळे गावाबद्दल
+      </h2>
+      <div class="flex-1 overflow-y-auto custom-scrollbar">
+        <p class="text-gray-700 text-lg leading-relaxed">
+          {{ content[0].content }}
+        </p>
+      </div>
+      <div class="mt-6 flex justify-center lg:justify-end">
+        <a href="#more" 
+           class="px-5 py-2 rounded-lg bg-green-700 text-white font-medium shadow-md hover:bg-green-600 transition">
+          अधिक वाचा
+        </a>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="bg-white rounded-2xl shadow-lg p-4 h-[28rem] flex flex-col">
+      <h2 class="text-2xl font-bold text-green-800 mb-4 text-center lg:text-left">
+        नकाशावर गाव
+      </h2>
+      <div class="flex-1 rounded-xl overflow-hidden">
+        <app-map-location></app-map-location>
+      </div>
+    </div>
+
+  </div>
+</section>

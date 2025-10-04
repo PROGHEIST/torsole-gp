@@ -13,6 +13,7 @@ import { GpBodies } from './components/gp-bodies/gp-bodies';
 import { Mission } from './mission/mission';
 import { OurMission } from './components/our-mission/our-mission';
 import { ImpLinks } from './components/imp-links/imp-links';
+import { MapLocation } from './components/map-location/map-location';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ImpLinks } from './components/imp-links/imp-links';
     GpBodies,
     Mission,
     OurMission,
-    ImpLinks
+    ImpLinks,
+    MapLocation
   ],
   imports: [
     BrowserModule,
