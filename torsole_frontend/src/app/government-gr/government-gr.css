@@ -1,0 +1,57 @@
+/* Professional UI for Government GR */
+.bg-gradient-to-br {
+	background: linear-gradient(135deg, #e0f2fe 0%, #cffafe 50%, #bae6fd 100%);
+}
+
+.rounded-xl {
+	border-radius: 1rem;
+}
+
+.shadow-lg {
+	box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+}
+
+.hover\:shadow-2xl:hover {
+	box-shadow: 0 16px 48px rgba(99,102,241,0.15), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.transition {
+	transition: box-shadow 0.3s, border-color 0.3s, color 0.2s;
+}
+
+.group:hover .group-hover\:text-indigo-700 {
+	color: #4338ca;
+}
+
+.bg-indigo-600 {
+	background-color: #4338ca;
+}
+.bg-cyan-600 {
+	background-color: #0891b2;
+}
+.text-indigo-600 {
+	color: #4338ca;
+}
+.text-cyan-600 {
+	color: #0891b2;
+}
+.font-bold {
+	font-weight: bold;
+}
+.font-medium {
+	font-weight: 500;
+}
+.tracking-tight {
+	letter-spacing: -0.01em;
+}
+.min-h-screen {
+	min-height: 100vh;
+}
+.filter-section label {
+	font-size: 0.95rem;
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+}
+.filter-section select {
+	min-width: 160px;
+}

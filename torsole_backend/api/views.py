@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import GramPanchayatInfoSerializer, SlideShowSerializer, AboutVillageSerializer, MissionSerializer, MissionObjectivesSerializer, ImportantLinksSerializer
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks
+from .serializers import GramPanchayatInfoSerializer, SlideShowSerializer, AboutVillageSerializer, MissionSerializer, MissionObjectivesSerializer, ImportantLinksSerializer, GovernmentGRSerializer, DepartmentSerializer
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department
 
 class GramPanchayatInfoViewSet(viewsets.ModelViewSet):
     serializer_class = GramPanchayatInfoSerializer
@@ -26,3 +26,11 @@ class MissionObjectivesViewSet(viewsets.ModelViewSet):
 class ImportantLinksViewset(viewsets.ModelViewSet):
     serializer_class = ImportantLinksSerializer
     queryset = ImportantLinks.objects.all()
+
+class GovernmentGRViewset(viewsets.ModelViewSet):
+    serializer_class = GovernmentGRSerializer
+    queryset = GovernmentGR.objects.all()
+
+class DepartmentViewset(viewsets.ModelViewSet):
+    serializer_class = DepartmentSerializer
+    queryset = Department.objects.all()

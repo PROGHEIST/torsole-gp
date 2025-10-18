@@ -1,0 +1,131 @@
+<!-- सरकारी ठराव SECTION -->
+<section class="relative py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-100 min-h-screen">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-96 h-96 bg-indigo-200 rounded-full blur-3xl opacity-40"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <!-- Section Heading -->
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
+        <span class="block">सरकारी ठराव</span>
+        <span
+          class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-full"></span>
+      </h2>
+      <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        ग्रामपंचायतीसंबंधित सरकारी ठरावांची माहिती येथे पाहा.
+      </p>
+    </div>
+
+    <!-- Filter & Search Section -->
+    <div
+      class="flex flex-col lg:flex-row items-center justify-center gap-6 mb-12 bg-white/70 backdrop-blur-xl border border-gray-200 shadow-md rounded-2xl p-6">
+
+      <!-- Department Filter -->
+      <div class="flex flex-col w-full sm:w-auto">
+        <label class="mb-1 text-sm font-semibold text-gray-700">विभाग</label>
+        <select
+          [(ngModel)]="selectedDepartment"
+          (change)="filterGrs()"
+          class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 bg-white">
+          <option value="">सर्व विभाग</option>
+          <option *ngFor="let dept of departments" [value]="dept">
+            {{ departmentNames[dept] || dept }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-col w-full sm:w-auto">
+        <label class="mb-1 text-sm font-semibold text-gray-700">श्रेणी</label>
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="filterGrs()"
+          class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 bg-white">
+          <option value="">सर्व श्रेणी</option>
+          <option *ngFor="let cat of categories" [value]="cat">
+            {{ cat }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex flex-col w-full sm:w-auto">
+        <label class="mb-1 text-sm font-semibold text-gray-700">शोधा</label>
+        <div class="relative">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="filterGrs()"
+            placeholder="शीर्षक किंवा वर्णन शोधा..."
+            class="w-full sm:w-80 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 bg-white"
+          />
+          <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Skeleton -->
+    <div *ngIf="loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div *ngFor="let n of [1,2,3,4,5,6]"
+        class="bg-white/80 p-6 rounded-xl shadow animate-pulse border border-gray-200 backdrop-blur-sm">
+        <div class="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+        <div class="h-4 bg-gray-300 rounded w-full mb-2"></div>
+        <div class="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+        <div class="h-3 bg-gray-300 rounded w-1/3 mb-2"></div>
+        <div class="h-10 bg-gray-300 rounded w-24 mt-6"></div>
+      </div>
+    </div>
+
+    <!-- No Data -->
+    <div *ngIf="!loading && filtered_grs.length === 0"
+      class="text-center text-gray-600 text-lg font-medium bg-white/80 p-10 rounded-2xl shadow-md border border-gray-100 backdrop-blur-md">
+      माहिती उपलब्ध नाही.
+    </div>
+
+    <!-- GR Cards -->
+    <div *ngIf="!loading && filtered_grs.length > 0"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div *ngFor="let gr of filtered_grs"
+        class="relative bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 p-6 overflow-hidden group">
+
+        <!-- Floating gradient accent -->
+        <div
+          class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-indigo-50 via-cyan-50 to-indigo-100 rounded-2xl"></div>
+
+        <!-- Department Badge (Top Left) -->
+        <div class="absolute top-4 left-4 bg-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-md shadow">
+          विभाग: {{ departmentNames[gr.department] || gr.department }}
+        </div>
+
+        <!-- Category Badge (Top Right) -->
+        <div class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-md shadow">
+          {{ gr.category }}
+        </div>
+
+        <!-- Card Content -->
+        <div class="relative z-10 flex-1 pt-14">
+          <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-700 transition">
+            {{ gr.title }}
+          </h3>
+          <p class="text-gray-700 mb-5 leading-relaxed">
+            {{ gr.description }}
+          </p>
+        </div>
+
+        <div class="relative z-10 mt-4">
+          <div class="flex items-center justify-between text-sm text-gray-500 mb-3">
+            <span>जारी दिनांक:</span>
+            <span class="font-medium text-gray-800">{{ gr.date_issued | date:'dd-MM-yyyy' }}</span>
+          </div>
+          <a [href]="gr.file" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white px-4 py-2 rounded-lg shadow hover:from-indigo-700 hover:to-cyan-700 transition-all duration-300">
+            <i class="fas fa-file-pdf"></i> PDF पहा
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

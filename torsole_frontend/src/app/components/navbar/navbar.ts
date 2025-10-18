@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { Api } from '../../api';
 
 
@@ -17,7 +19,7 @@ export class Navbar implements OnInit {
   isRTIOpen = false;
   loading: boolean = true;
 
-  constructor(private api: Api, private cdr: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private api: Api, private cdr: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document, private router: Router) {}
 
   ngOnInit(): void {
     this.api.getAppData().subscribe(
@@ -31,6 +33,15 @@ export class Navbar implements OnInit {
         console.log("data not fetched!", err);
         this.loading = false;
       })
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.isMenuOpen = false;
+      this.isAboutOpen = false;
+      this.isCitizenOpen = false;
+      this.isRTIOpen = false;
+    });
   }
 
   toggleMenu() {
@@ -60,4 +71,6 @@ export class Navbar implements OnInit {
     this.isAboutOpen = false;
     this.isCitizenOpen = false;
   }
+
+
 }

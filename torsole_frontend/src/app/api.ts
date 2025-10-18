@@ -31,5 +31,13 @@ export class Api {
   getImpLinksData(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/important-links`)
   }
+
+  getGovernmentGrData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/goverment-grs`)
+  }
+
+  getGRDepartmentData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/gr-departments`)
+  }
   
 }

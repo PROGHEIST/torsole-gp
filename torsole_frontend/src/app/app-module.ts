@@ -14,6 +14,8 @@ import { Mission } from './mission/mission';
 import { OurMission } from './components/our-mission/our-mission';
 import { ImpLinks } from './components/imp-links/imp-links';
 import { MapLocation } from './components/map-location/map-location';
+import { GovernmentGr } from './government-gr/government-gr';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MapLocation } from './components/map-location/map-location';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    GovernmentGr
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

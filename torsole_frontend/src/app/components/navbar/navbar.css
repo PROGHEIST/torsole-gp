@@ -1,0 +1,4 @@
+/* Dropdown hover styles */
+.group:hover .dropdown {
+  display: block;
+}
