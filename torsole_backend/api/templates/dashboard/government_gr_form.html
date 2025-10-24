@@ -1,0 +1,70 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-8 mt-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">
+        📄 {{ title }}
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+        {% csrf_token %}
+
+        <div>
+            <label for="{{ form.department.id_for_label }}" class="block mb-2 font-medium text-gray-700">विभाग</label>
+            {{ form.department }}
+            {% if form.department.errors %}
+                <div class="text-red-600 text-sm">{{ form.department.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.title.id_for_label }}" class="block mb-2 font-medium text-gray-700">शीर्षक</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="text-red-600 text-sm">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.description.id_for_label }}" class="block mb-2 font-medium text-gray-700">वर्णन</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="text-red-600 text-sm">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.file.id_for_label }}" class="block mb-2 font-medium text-gray-700">फाईल</label>
+            {{ form.file }}
+            {% if form.file.errors %}
+                <div class="text-red-600 text-sm">{{ form.file.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.category.id_for_label }}" class="block mb-2 font-medium text-gray-700">श्रेणी</label>
+            {{ form.category }}
+            {% if form.category.errors %}
+                <div class="text-red-600 text-sm">{{ form.category.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.date_issued.id_for_label }}" class="block mb-2 font-medium text-gray-700">जारी करण्याची तारीख</label>
+            {{ form.date_issued }}
+            {% if form.date_issued.errors %}
+                <div class="text-red-600 text-sm">{{ form.date_issued.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex justify-between pt-4">
+            <a href="{% url 'government-gr-list' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                रद्द करा
+            </a>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                जतन करा
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

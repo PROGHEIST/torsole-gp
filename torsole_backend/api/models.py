@@ -69,3 +69,24 @@ class GovernmentGR(models.Model):
     def __str__(self):
         return f"{self.title} ({self.department.name})"
 
+class GramPanchayatDocuments(models.Model):
+    title = models.CharField(max_length=250)
+    description = models.TextField(blank=True, null=True)
+    file = models.FileField(upload_to="gp_documents/")
+    category = models.CharField(max_length=100, blank=True, null=True)
+    date_issued = models.DateField()
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class PhotoGallery(models.Model):
+    title = models.CharField(max_length=250)
+    image = models.ImageField(upload_to="photo_gallery/")
+    description = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=100, blank=True, null=True)
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+

@@ -1,6 +1,7 @@
-- [x] Add MissionSerializer to api/serializers.py
-- [x] Add MissionObjectivesSerializer to api/serializers.py
-- [x] Add MissionViewSet to api/views.py
-- [x] Add MissionObjectivesViewSet to api/views.py
-- [x] Register MissionViewSet and MissionObjectivesViewSet in router in api/urls.py
-- Test the API endpoints
+# TODO: Show Latest Uploaded Data from All Models in Dashboard
+
+## Steps to Complete
+
+- [x] Update Dashboard view in api/views.py to query and pass latest items from each model to the context.
+- [x] Modify api/templates/dashboard/dashboard.html to add a new section displaying the latest items from each model below the chart.
+- [ ] Test the dashboard to ensure the latest data displays correctly and all models are covered.

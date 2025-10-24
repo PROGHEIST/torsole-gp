@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ग्रामपंचायत लॉगिन</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl">
+    
+    <!-- डावीकडील इमेज -->
+    <div class="hidden md:block md:w-1/2">
+      <img src="{{img.url}}" 
+           alt="ग्रामपंचायत इमेज" class="h-full w-full object-cover rounded-l-lg">
+    </div>
+    
+    <!-- उजवीकडील फॉर्म -->
+    <div class="w-full md:w-1/2 p-8 md:p-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">स्वागत आहे!</h2>
+      <p class="text-gray-600 mb-8">कृपया आपले खाते लॉगिन करा</p>
+
+      <form action="#" method="POST" class="space-y-5">
+        {% csrf_token %}
+        <div>
+          <label for="username" class="block text-gray-700">युझरनेम</label>
+          <input type="text" id="username" name="username" placeholder="आपला युझरनेम टाका" 
+                 class="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+        </div>
+
+        <div>
+          <label for="password" class="block text-gray-700">पासवर्ड</label>
+          <input type="password" id="password" name="password" placeholder="पासवर्ड टाका" 
+                 class="w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+        </div>
+
+        <div class="flex justify-between items-center">
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600">
+            <span class="text-gray-600">मला आठवा</span>
+          </label>
+          <a href="#" class="text-blue-600 hover:underline text-sm">पासवर्ड विसरलात?</a>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300">लॉगिन करा</button>
+      </form>
+
+      <p class="mt-6 text-gray-600 text-center">
+        खाते नाही? <a href="#" class="text-blue-600 hover:underline">नोंदणी करा</a>
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>

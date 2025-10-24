@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, MissionObjectives, Mission, ImportantLinks, Department, GovernmentGR
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, MissionObjectives, Mission, ImportantLinks, Department, GovernmentGR, GramPanchayatDocuments, PhotoGallery
 
 class MissionInline(admin.TabularInline):
     model = MissionObjectives.missions.through
@@ -17,3 +17,5 @@ admin.site.register(Mission)
 admin.site.register(MissionObjectives, MissionObjectivesAdmin)
 admin.site.register(Department)
 admin.site.register(GovernmentGR)
+admin.site.register(GramPanchayatDocuments)
+admin.site.register(PhotoGallery)

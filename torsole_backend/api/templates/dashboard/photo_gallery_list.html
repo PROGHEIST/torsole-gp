@@ -1,0 +1,48 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto bg-white p-8 mt-6 rounded-xl shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-green-700">
+            📸 फोटो गॅलरी
+        </h2>
+        <a href="{% url 'photo-gallery-create' %}" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg shadow">
+            नवी फोटो जोडा
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mb-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if photo_galleries %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for photo_gallery in photo_galleries %}
+                <div class="bg-gray-50 p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <img src="{{ photo_gallery.image.url }}" alt="{{ photo_gallery.title }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ photo_gallery.title }}</h3>
+                    {% if photo_gallery.description %}
+                        <p class="text-gray-600 text-sm mb-2">{{ photo_gallery.description|truncatechars:100 }}</p>
+                    {% endif %}
+                    {% if photo_gallery.category %}
+                        <p class="text-green-600 text-sm font-medium mb-4">श्रेणी: {{ photo_gallery.category }}</p>
+                    {% endif %}
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-500 text-xs">{{ photo_gallery.upload_date|date:"d/m/Y" }}</span>
+                        <div>
+                            <a href="{% url 'photo-gallery-update' photo_gallery.pk %}" class="text-blue-600 hover:text-blue-800 mr-2">संपादित करा</a>
+                            <a href="{% url 'photo-gallery-delete' photo_gallery.pk %}" class="text-red-600 hover:text-red-800">हटवा</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-600 text-center py-8">कोणत्याही फोटो आढळल्या नाहीत. <a href="{% url 'photo-gallery-create' %}" class="text-green-600 hover:text-green-700">नवी जोडा</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

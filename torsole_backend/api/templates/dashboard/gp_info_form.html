@@ -1,0 +1,54 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-8 mt-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">
+        🌿 {{ title }}
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+        {% csrf_token %}
+
+        <div>
+            <label for="{{ form.logo.id_for_label }}" class="block mb-2 font-medium text-gray-700">ग्रामपंचायतीचा लोगो</label>
+            {{ form.logo }}
+            {% if form.logo.errors %}
+                <div class="text-red-600 text-sm">{{ form.logo.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.name.id_for_label }}" class="block mb-2 font-medium text-gray-700">ग्रामपंचायतीचे नाव</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-red-600 text-sm">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.address.id_for_label }}" class="block mb-2 font-medium text-gray-700">पत्ता</label>
+            {{ form.address }}
+            {% if form.address.errors %}
+                <div class="text-red-600 text-sm">{{ form.address.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.description.id_for_label }}" class="block mb-2 font-medium text-gray-700">वर्णन</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="text-red-600 text-sm">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex justify-between pt-4">
+            <a href="{% url 'about-gp' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                रद्द करा
+            </a>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                जतन करा
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

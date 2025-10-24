@@ -1,0 +1,30 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-8 mt-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">
+        🎯 {{ title }}
+    </h2>
+
+    <form method="POST" class="space-y-5">
+        {% csrf_token %}
+
+        <div>
+            <label for="{{ form.mission.id_for_label }}" class="block mb-2 font-medium text-gray-700">मिशन</label>
+            {{ form.mission }}
+            {% if form.mission.errors %}
+                <div class="text-red-600 text-sm">{{ form.mission.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex justify-between pt-4">
+            <a href="{% url 'mission-list' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                रद्द करा
+            </a>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                जतन करा
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

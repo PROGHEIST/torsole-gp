@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ग्रामपंचायत प्रशासन डॅशबोर्ड</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+  <nav class="bg-green-700 p-4 flex justify-between items-center text-white shadow-md">
+    <h1 class="text-xl font-bold">🌿 ग्रामपंचायत प्रशासन</h1>
+    <div>
+      <span class="mr-4">नमस्कार, प्रशासक</span>
+      <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">बाहेर पडा</a>
+    </div>
+  </nav>
+
+  
+  <div class="flex min-h-screen">
+
+    
+    <aside class="w-64 bg-white border-r">
+      <ul class="p-4 space-y-2">
+        <li><a href="/dashboard/about-gp" class="block p-2 rounded hover:bg-green-100 font-medium">🏠 ग्रामपंचायत माहिती</a></li>
+        <li><a href="{% url 'slideshow-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">🖼️ स्लाईड शो</a></li>
+        <li><a href="{% url 'about-village-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">🏡 गावाची माहिती</a></li>
+        <li><a href="{% url 'important-links-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">🔗 महत्वाच्या लिंक</a></li>
+        <li><a href="{% url 'mission-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">🎯 मिशन</a></li>
+        <li><a href="{% url 'mission-objectives-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">📋 मिशन उद्दिष्टे</a></li>
+        <li><a href="{% url 'department-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">🏢 विभाग</a></li>
+        <li><a href="{% url 'government-gr-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">📄 शासन निर्णय (GR)</a></li>
+        <li><a href="{% url 'gp-documents-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">📄 ग्रामपंचायत दस्तऐवज</a></li>
+        <li><a href="{% url 'photo-gallery-list' %}" class="block p-2 rounded hover:bg-green-100 font-medium">📸 फोटो गॅलरी</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Welcome Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">नमस्कार, {{ user }}!</h2>
+        <p class="text-gray-600">ग्रामपंचायत प्रशासन डॅशबोर्डमध्ये आपले स्वागत आहे. खाली आपल्या सिस्टमचे संक्षिप्त आढावा आहे.</p>
+      </div>
+
+      <!-- Interactive Chart -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">सिस्टम आढावा</h3>
+        <canvas id="dashboardChart" width="400" height="200"></canvas>
+      </div>
+
+      <!-- Latest Uploaded Data Section -->
+      <div class="bg-white p-6 rounded-lg shadow-md mt-8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">नवीनतम अपलोड केलेली डेटा</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% if latest_slideshow %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">स्लाईड शो</h4>
+            <p class="text-sm text-gray-600">{{ latest_slideshow.name }}</p>
+            <p class="text-xs text-gray-500">अपडेट: {{ latest_slideshow.updated_at|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+          {% if latest_about_village %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">गावाची माहिती</h4>
+            <p class="text-sm text-gray-600">{{ latest_about_village.content|truncatechars:50 }}</p>
+            <p class="text-xs text-gray-500">अपडेट: {{ latest_about_village.updated_at|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+          {% if latest_important_link %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">महत्वाच्या लिंक</h4>
+            <p class="text-sm text-gray-600">{{ latest_important_link.title }}</p>
+            <p class="text-xs text-gray-500">अपडेट: {{ latest_important_link.updated_at|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+          {% if latest_mission %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">मिशन</h4>
+            <p class="text-sm text-gray-600">{{ latest_mission.mission|truncatechars:50 }}</p>
+          </div>
+          {% endif %}
+          {% if latest_mission_objective %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">मिशन उद्दिष्टे</h4>
+            <p class="text-sm text-gray-600">{{ latest_mission_objective.heading }}</p>
+          </div>
+          {% endif %}
+          {% if latest_department %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">विभाग</h4>
+            <p class="text-sm text-gray-600">{{ latest_department.name }}</p>
+          </div>
+          {% endif %}
+          {% if latest_government_gr %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">शासन निर्णय (GR)</h4>
+            <p class="text-sm text-gray-600">{{ latest_government_gr.title }}</p>
+            <p class="text-xs text-gray-500">अपलोड: {{ latest_government_gr.upload_date|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+          {% if latest_gp_document %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">ग्रामपंचायत दस्तऐवज</h4>
+            <p class="text-sm text-gray-600">{{ latest_gp_document.title }}</p>
+            <p class="text-xs text-gray-500">अपलोड: {{ latest_gp_document.upload_date|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+          {% if latest_photo_gallery %}
+          <div class="border rounded p-4">
+            <h4 class="font-bold text-green-700">फोटो गॅलरी</h4>
+            <p class="text-sm text-gray-600">{{ latest_photo_gallery.title }}</p>
+            <p class="text-xs text-gray-500">अपलोड: {{ latest_photo_gallery.upload_date|date:"d/m/Y" }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+
+    {% block content %}
+    {% endblock %}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('dashboardChart').getContext('2d');
+        const dashboardChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['स्लाईड शो', 'गावाची माहिती', 'महत्वाच्या लिंक', 'मिशन', 'मिशन उद्दिष्टे', 'विभाग', 'शासन निर्णय (GR)', 'ग्रामपंचायत दस्तऐवज', 'फोटो गॅलरी'],
+            datasets: [{
+              label: 'आयटम संख्या',
+              data: [{{ slideshow_count }}, {{ about_village_count }}, {{ important_links_count }}, {{ mission_count }}, {{ mission_objectives_count }}, {{ department_count }}, {{ government_gr_count }}, {{ gp_documents_count }}, {{ photo_gallery_count }}],
+              backgroundColor: [
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(255, 99, 132, 0.6)'
+              ],
+              borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top'
+              },
+              tooltip: {
+                enabled: true
+              }
+            }
+          }
+        });
+      });
+    </script>
+
+  </div>
+</body>
+</html>
