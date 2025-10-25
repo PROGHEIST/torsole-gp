@@ -53,4 +53,8 @@ export class GpPhotos implements OnInit{
     link.click();
   }
 
+  trackByFn(index: number, item: any): any {
+    return item.id || index;
+  }
+
 }
