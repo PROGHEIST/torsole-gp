@@ -40,4 +40,11 @@ export class Api {
     return this.http.get<any>(`${this.apiUrl}/gr-departments`)
   }
   
+  getGPDocumentsData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/gp-documents`)
+  }
+
+  getPhotoGalleryData(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/photo-gallery`)
+  }
 }

@@ -1,0 +1,54 @@
+<div class="container mx-auto px-4 py-10">
+  <!-- Header -->
+  <h1 class="text-3xl md:text-4xl font-bold text-center mb-10 text-emerald-700">
+    🏛️ ग्रामपंचायत दस्तऐवज
+  </h1>
+
+  <!-- Documents Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let gpdocs of gpDocuments"
+      class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden"
+    >
+      <!-- Card Header -->
+      <div class="bg-emerald-600 text-white px-5 py-3 flex items-center justify-between">
+        <h2 class="text-lg font-semibold truncate">{{ gpdocs.title }}</h2>
+        <span class="text-sm bg-white/20 px-2 py-1 rounded-md">
+          {{ gpdocs.category }}
+        </span>
+      </div>
+
+      <!-- Card Body -->
+      <div class="p-5 space-y-3">
+        <p class="text-gray-700 text-sm leading-relaxed line-clamp-3">
+          {{ gpdocs.description }}
+        </p>
+
+        <div class="flex flex-col text-sm text-gray-600 mt-2">
+          <span>
+            📅 <strong>जारी दिनांक:</strong> {{ gpdocs.date_issued | date:'dd MMM yyyy' }}
+          </span>
+          <span>
+            ⏱️ <strong>अपलोड दिनांक:</strong> {{ gpdocs.upload_date | date:'dd MMM yyyy' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Card Footer -->
+      <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
+        <a
+          [href]="gpdocs.file"
+          target="_blank"
+          class="text-emerald-600 font-medium text-sm hover:text-emerald-800 transition-colors"
+        >
+          📄 दस्तऐवज पाहा
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- No documents found -->
+  <div *ngIf="gpDocuments.length === 0" class="text-center mt-10 text-gray-500">
+    कोणतेही दस्तऐवज उपलब्ध नाहीत.
+  </div>
+</div>

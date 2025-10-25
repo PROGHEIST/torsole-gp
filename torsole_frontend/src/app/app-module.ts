@@ -16,6 +16,8 @@ import { ImpLinks } from './components/imp-links/imp-links';
 import { MapLocation } from './components/map-location/map-location';
 import { GovernmentGr } from './government-gr/government-gr';
 import { FormsModule } from '@angular/forms';
+import { GpDocuments } from './gp-documents/gp-documents';
+import { GpPhotos } from './gp-photos/gp-photos';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     Mission,
     OurMission,
     ImpLinks,
-    MapLocation
+    MapLocation,
+    GpDocuments,
+    GpPhotos
   ],
   imports: [
     BrowserModule,
