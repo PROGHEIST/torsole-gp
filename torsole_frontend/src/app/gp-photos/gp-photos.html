@@ -4,12 +4,29 @@
     📸 छायाचित्रे
   </h1>
 
+  <!-- Search and Filter -->
+  <div class="flex flex-col md:flex-row gap-4 mb-8 justify-center items-center">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="शीर्षकाने शोधा..."
+      class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full md:w-1/3"
+    />
+    <select
+      [(ngModel)]="selectedCategory"
+      class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full md:w-1/4"
+    >
+      <option value="">सर्व श्रेण्या</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
   <!-- Photo Grid -->
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
   >
     <div
-      *ngFor="let ph of gpPhotos"
+      *ngFor="let ph of filteredPhotos"
       class="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 bg-white"
     >
       <!-- Image -->
@@ -65,7 +82,7 @@
   </div>
 
   <!-- No Photos Message -->
-  <div *ngIf="gpPhotos.length === 0" class="text-center mt-10 text-gray-500">
+  <div *ngIf="filteredPhotos.length === 0" class="text-center mt-10 text-gray-500">
     कोणतीही छायाचित्रे उपलब्ध नाहीत.
   </div>
 </div>

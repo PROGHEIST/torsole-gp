@@ -11,6 +11,9 @@ export class GpPhotos implements OnInit{
 
   gpPhotos: any[] = [];
   selectedPhoto: any = null;
+  searchTerm: string = '';
+  selectedCategory: string = '';
+  categories: string[] = [];
 
   constructor(private api: Api, private cdr: ChangeDetectorRef){}
 
@@ -18,12 +21,21 @@ export class GpPhotos implements OnInit{
     this.api.getPhotoGalleryData().subscribe(
       (data) => {
         this.gpPhotos = data;
+        this.categories = Array.from(new Set(data.map((photo: any) => photo.category as string)));
         this.cdr.detectChanges();
       },
       (error) => {
         console.log("failed to fetch photos", error)
       }
     )
+  }
+
+  get filteredPhotos(): any[] {
+    return this.gpPhotos.filter(photo => {
+      const matchesSearch = photo.title.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const matchesCategory = this.selectedCategory === '' || photo.category === this.selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
   }
 
   openFullscreen(photo: any): void {

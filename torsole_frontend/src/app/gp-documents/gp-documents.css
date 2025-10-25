@@ -1,0 +1,19 @@
+.btn.active {
+  @apply bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700;
+}
+
+.document-card {
+  @apply transform hover:scale-105 transition-transform duration-300;
+}
+
+.category-badge {
+  @apply bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm;
+}
+
+.view-document-btn {
+  @apply inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors duration-200 shadow-md hover:shadow-lg;
+}
+
+.view-document-btn:hover {
+  @apply transform translate-y-[-1px];
+}

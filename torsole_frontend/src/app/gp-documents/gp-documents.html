@@ -1,54 +1,95 @@
-<div class="container mx-auto px-4 py-10">
-  <!-- Header -->
-  <h1 class="text-3xl md:text-4xl font-bold text-center mb-10 text-emerald-700">
-    🏛️ ग्रामपंचायत दस्तऐवज
-  </h1>
-
-  <!-- Documents Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div
-      *ngFor="let gpdocs of gpDocuments"
-      class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden"
-    >
-      <!-- Card Header -->
-      <div class="bg-emerald-600 text-white px-5 py-3 flex items-center justify-between">
-        <h2 class="text-lg font-semibold truncate">{{ gpdocs.title }}</h2>
-        <span class="text-sm bg-white/20 px-2 py-1 rounded-md">
-          {{ gpdocs.category }}
-        </span>
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50">
+  <div class="container mx-auto px-4 py-12">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 rounded-full mb-6">
+        <span class="text-4xl">🏛️</span>
       </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        ग्रामपंचायत दस्तऐवज
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        सरकारी कागदपत्रे आणि महत्त्वपूर्ण दस्तऐवज येथे उपलब्ध आहेत. आपल्या गरजेनुसार फिल्टर करून पहा.
+      </p>
+    </div>
 
-      <!-- Card Body -->
-      <div class="p-5 space-y-3">
-        <p class="text-gray-700 text-sm leading-relaxed line-clamp-3">
-          {{ gpdocs.description }}
-        </p>
-
-        <div class="flex flex-col text-sm text-gray-600 mt-2">
-          <span>
-            📅 <strong>जारी दिनांक:</strong> {{ gpdocs.date_issued | date:'dd MMM yyyy' }}
-          </span>
-          <span>
-            ⏱️ <strong>अपलोड दिनांक:</strong> {{ gpdocs.upload_date | date:'dd MMM yyyy' }}
-          </span>
-        </div>
-      </div>
-
-      <!-- Card Footer -->
-      <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
-        <a
-          [href]="gpdocs.file"
-          target="_blank"
-          class="text-emerald-600 font-medium text-sm hover:text-emerald-800 transition-colors"
-        >
-          📄 दस्तऐवज पाहा
-        </a>
+    <!-- Category Filter Section -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-emerald-100">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">श्रेणीनुसार फिल्टर</h2>
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button [class.active]="selectedCategory === ''" (click)="filterByCategory('')" class="px-8 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 border-emerald-300 text-emerald-800 bg-emerald-100 hover:bg-emerald-200 hover:border-emerald-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 shadow-md">
+          <span class="mr-2">📋</span>सर्व
+        </button>
+        <button [class.active]="selectedCategory === cat" *ngFor="let cat of categories" (click)="filterByCategory(cat)" class="px-8 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 border-emerald-300 text-emerald-800 bg-emerald-100 hover:bg-emerald-200 hover:border-emerald-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 shadow-md">
+          <span class="mr-2">📁</span>{{ cat }}
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- No documents found -->
-  <div *ngIf="gpDocuments.length === 0" class="text-center mt-10 text-gray-500">
-    कोणतेही दस्तऐवज उपलब्ध नाहीत.
+    <!-- Documents Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let gpdocs of filteredDocuments"
+        class="document-card bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden group"
+      >
+        <!-- Card Header -->
+        <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-6 py-4 flex items-center justify-between">
+          <h2 class="text-lg font-semibold truncate flex-1 mr-3">{{ gpdocs.title }}</h2>
+          <span class="category-badge whitespace-nowrap">
+            {{ gpdocs.category }}
+          </span>
+        </div>
+
+        <!-- Card Content -->
+        <div class="p-6 space-y-4">
+          <p class="text-gray-700 text-sm leading-relaxed line-clamp-3">
+            {{ gpdocs.description }}
+          </p>
+
+          <div class="space-y-2">
+            <div class="flex items-center text-sm text-gray-600">
+              <span class="mr-2">📅</span>
+              <strong class="mr-2">जारी दिनांक:</strong>
+              <span>{{ gpdocs.date_issued | date:'dd MMM yyyy' }}</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-600">
+              <span class="mr-2">⏱️</span>
+              <strong class="mr-2">अपलोड दिनांक:</strong>
+              <span>{{ gpdocs.upload_date | date:'dd MMM yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
+          <a
+            [href]="gpdocs.file"
+            target="_blank"
+            class="view-document-btn w-full justify-center"
+          >
+            <span class="mr-2">📄</span>
+            दस्तऐवज पाहा
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- No documents found -->
+    <div *ngIf="filteredDocuments.length === 0 && gpDocuments.length > 0" class="text-center mt-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+        <span class="text-2xl">📭</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">कोणतेही दस्तऐवज सापडले नाहीत</h3>
+      <p class="text-gray-500">या श्रेणीमध्ये कोणतेही दस्तऐवज उपलब्ध नाहीत. दुसरी श्रेणी निवडून पहा.</p>
+    </div>
+
+    <!-- Loading state -->
+    <div *ngIf="gpDocuments.length === 0" class="text-center mt-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full mb-4 animate-pulse">
+        <span class="text-2xl">📚</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">दस्तऐवज लोड होत आहेत...</h3>
+      <p class="text-gray-500">कृपया थोडा वेळ वाट पाहा.</p>
+    </div>
   </div>
 </div>
