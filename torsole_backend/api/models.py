@@ -90,3 +90,36 @@ class PhotoGallery(models.Model):
     def __str__(self):
         return self.title
 
+
+class GrampanchayatBodies(models.Model):
+    name = models.CharField(max_length=200, blank=True)
+    position = models.CharField(max_length=200, blank=True)
+    photo = models.ImageField(upload_to='bodies_photos/', blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"{self.name} - {self.position}"
+    
+class MaharastraOfficers(models.Model):
+    name = models.CharField(max_length=200, blank=True)
+    position = models.CharField(max_length=200, blank=True)
+    photo = models.ImageField(upload_to='maharastra_officers_photos/', blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"{self.name} - {self.position}"
+
+
+
+class TorsoleVillagePopulation(models.Model):
+    from_year = models.IntegerField()
+    to_year = models.IntegerField()
+    vilage_name = models.CharField(max_length=200, blank=True)
+    family_count = models.IntegerField()
+    population = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.vilage_name} ({self.from_year}-{self.to_year})"
+    

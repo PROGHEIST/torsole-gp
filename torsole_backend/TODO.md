@@ -1,8 +1,19 @@
-# TODO: Hide Main Content of Dashboard While Working with Sidebar Options
+# TODO: Add CRUD functionality for new models to dashboard
 
-## Steps to Complete:
-- [x] Wrap the main content in a div with id="main-content" for dynamic updates.
-- [x] Add a "Dashboard" link at the top of the sidebar to reload the main content.
-- [x] Modify sidebar links to use JavaScript: prevent default navigation, fetch content via AJAX, and update the main-content div.
-- [x] Add JavaScript code to handle the dynamic loading and hiding of main content.
-- [x] Test the changes by running the Django server and verifying sidebar interactions.
+## Completed
+- [x] Analyze existing code structure
+- [x] Create plan
+- [x] Create forms for GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation in forms.py
+- [x] Add API ViewSets for the new models in views.py
+- [x] Add custom dashboard CRUD views (list, create, update, delete) for each model in views.py
+- [x] Add URL patterns for the new views in urls.py
+- [x] Update Dashboard view to include counts and latest items for new models
+- [x] Enhance admin.py with custom admin classes for better admin interface
+- [x] Create HTML templates for list, form, and delete views for each model
+- [x] Run migrations to create database tables
+- [x] Test the functionality
+
+## Notes
+- Follow the existing patterns from other models
+- Use similar naming conventions
+- Ensure proper imports and registrations

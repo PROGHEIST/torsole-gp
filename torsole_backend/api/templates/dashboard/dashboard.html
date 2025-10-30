@@ -34,6 +34,9 @@
         <li><a href="{% url 'government-gr-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">📄 शासन निर्णय (GR)</a></li>
         <li><a href="{% url 'gp-documents-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">📄 ग्रामपंचायत दस्तऐवज</a></li>
         <li><a href="{% url 'photo-gallery-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">📸 फोटो गॅलरी</a></li>
+        <li><a href="{% url 'grampanchayat-bodies-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">👥 ग्रामपंचायत सदस्य</a></li>
+        <li><a href="{% url 'maharastra-officers-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">👨‍💼 महाराष्ट्र अधिकारी</a></li>
+        <li><a href="{% url 'torsole-village-population-list' %}" class="sidebar-link block p-2 rounded hover:bg-green-100 font-medium">📊 गाव लोकसंख्या</a></li>
       </ul>
     </aside>
 
@@ -117,6 +120,27 @@
               <p class="text-xs text-gray-500">अपलोड: {{ latest_photo_gallery.upload_date|date:"d/m/Y" }}</p>
             </div>
             {% endif %}
+            {% if latest_grampanchayat_body %}
+            <div class="border rounded p-4">
+              <h4 class="font-bold text-green-700">ग्रामपंचायत सदस्य</h4>
+              <p class="text-sm text-gray-600">{{ latest_grampanchayat_body.name }}</p>
+              <p class="text-xs text-gray-500">अपडेट: {{ latest_grampanchayat_body.updated_at|date:"d/m/Y" }}</p>
+            </div>
+            {% endif %}
+            {% if latest_maharastra_officer %}
+            <div class="border rounded p-4">
+              <h4 class="font-bold text-green-700">महाराष्ट्र अधिकारी</h4>
+              <p class="text-sm text-gray-600">{{ latest_maharastra_officer.name }}</p>
+              <p class="text-xs text-gray-500">अपडेट: {{ latest_maharastra_officer.updated_at|date:"d/m/Y" }}</p>
+            </div>
+            {% endif %}
+            {% if latest_torsole_population %}
+            <div class="border rounded p-4">
+              <h4 class="font-bold text-green-700">गाव लोकसंख्या</h4>
+              <p class="text-sm text-gray-600">{{ latest_torsole_population.vilage_name }}</p>
+              <p class="text-xs text-gray-500">{{ latest_torsole_population.from_year }}-{{ latest_torsole_population.to_year }}</p>
+            </div>
+            {% endif %}
           </div>
         </div>
         {% endblock %}
@@ -132,10 +156,10 @@
           const dashboardChart = new Chart(ctx, {
             type: 'bar',
             data: {
-              labels: ['स्लाईड शो', 'गावाची माहिती', 'महत्वाच्या लिंक', 'मिशन', 'मिशन उद्दिष्टे', 'विभाग', 'शासन निर्णय (GR)', 'ग्रामपंचायत दस्तऐवज', 'फोटो गॅलरी'],
+              labels: ['स्लाईड शो', 'गावाची माहिती', 'महत्वाच्या लिंक', 'मिशन', 'मिशन उद्दिष्टे', 'विभाग', 'शासन निर्णय (GR)', 'ग्रामपंचायत दस्तऐवज', 'फोटो गॅलरी', 'ग्रामपंचायत सदस्य', 'महाराष्ट्र अधिकारी', 'गाव लोकसंख्या'],
               datasets: [{
                 label: 'आयटम संख्या',
-                data: [{{ slideshow_count }}, {{ about_village_count }}, {{ important_links_count }}, {{ mission_count }}, {{ mission_objectives_count }}, {{ department_count }}, {{ government_gr_count }}, {{ gp_documents_count }}, {{ photo_gallery_count }}],
+                data: [{{ slideshow_count }}, {{ about_village_count }}, {{ important_links_count }}, {{ mission_count }}, {{ mission_objectives_count }}, {{ department_count }}, {{ government_gr_count }}, {{ gp_documents_count }}, {{ photo_gallery_count }}, {{ grampanchayat_bodies_count }}, {{ maharastra_officers_count }}, {{ torsole_village_population_count }}],
                 backgroundColor: [
                   'rgba(54, 162, 235, 0.6)',
                   'rgba(75, 192, 192, 0.6)',
@@ -145,7 +169,10 @@
                   'rgba(255, 99, 132, 0.6)',
                   'rgba(54, 162, 235, 0.6)',
                   'rgba(255, 206, 86, 0.6)',
-                  'rgba(255, 99, 132, 0.6)'
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)',
+                  'rgba(255, 159, 64, 0.6)'
                 ],
                 borderColor: [
                   'rgba(54, 162, 235, 1)',
@@ -156,7 +183,10 @@
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)',
-                  'rgba(255, 99, 132, 1)'
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
               }]

@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset, MissionViewSet, MissionObjectivesViewSet, ImportantLinksViewset, GovernmentGRViewset, DepartmentViewset, GramPanchayatDocumentsViewset, PhotoGalleryViewset
+from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset, MissionViewSet, MissionObjectivesViewSet, ImportantLinksViewset, GovernmentGRViewset, DepartmentViewset, GramPanchayatDocumentsViewset, PhotoGalleryViewset, GrampanchayatBodiesViewset, MaharastraOfficersViewset, TorsoleVillagePopulationViewset
 from . import views
 
 router = routers.DefaultRouter()
@@ -16,6 +16,9 @@ router.register('goverment-grs', GovernmentGRViewset)
 router.register('gr-departments', DepartmentViewset)
 router.register('gp-documents', GramPanchayatDocumentsViewset)
 router.register('photo-gallery', PhotoGalleryViewset)
+router.register('grampanchayat-bodies', GrampanchayatBodiesViewset)
+router.register('maharastra-officers', MaharastraOfficersViewset)
+router.register('torsole-village-population', TorsoleVillagePopulationViewset)
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -61,6 +64,18 @@ urlpatterns = [
     path('dashboard/photo-gallery/create/', views.photo_gallery_create, name='photo-gallery-create'),
     path('dashboard/photo-gallery/update/<int:pk>/', views.photo_gallery_update, name='photo-gallery-update'),
     path('dashboard/photo-gallery/delete/<int:pk>/', views.photo_gallery_delete, name='photo-gallery-delete'),
+    path('dashboard/grampanchayat-bodies/', views.grampanchayat_bodies_list, name='grampanchayat-bodies-list'),
+    path('dashboard/grampanchayat-bodies/create/', views.grampanchayat_bodies_create, name='grampanchayat-bodies-create'),
+    path('dashboard/grampanchayat-bodies/update/<int:pk>/', views.grampanchayat_bodies_update, name='grampanchayat-bodies-update'),
+    path('dashboard/grampanchayat-bodies/delete/<int:pk>/', views.grampanchayat_bodies_delete, name='grampanchayat-bodies-delete'),
+    path('dashboard/maharastra-officers/', views.maharastra_officers_list, name='maharastra-officers-list'),
+    path('dashboard/maharastra-officers/create/', views.maharastra_officers_create, name='maharastra-officers-create'),
+    path('dashboard/maharastra-officers/update/<int:pk>/', views.maharastra_officers_update, name='maharastra-officers-update'),
+    path('dashboard/maharastra-officers/delete/<int:pk>/', views.maharastra_officers_delete, name='maharastra-officers-delete'),
+    path('dashboard/torsole-village-population/', views.torsole_village_population_list, name='torsole-village-population-list'),
+    path('dashboard/torsole-village-population/create/', views.torsole_village_population_create, name='torsole-village-population-create'),
+    path('dashboard/torsole-village-population/update/<int:pk>/', views.torsole_village_population_update, name='torsole-village-population-update'),
+    path('dashboard/torsole-village-population/delete/<int:pk>/', views.torsole_village_population_delete, name='torsole-village-population-delete'),
     path('logout', views.logout_view, name="logout")
 ]
 

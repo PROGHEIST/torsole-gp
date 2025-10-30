@@ -1,5 +1,5 @@
-from django.forms import ModelForm, TextInput, Textarea, FileInput, SelectDateWidget, Select
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, Department, GovernmentGR, GramPanchayatDocuments, PhotoGallery
+from django.forms import ModelForm, TextInput, Textarea, FileInput, SelectDateWidget, Select, NumberInput
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, Department, GovernmentGR, GramPanchayatDocuments, PhotoGallery, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation
 
 class GramPanchayatInfoForm(ModelForm):
     class Meta:
@@ -161,6 +161,60 @@ class PhotoGalleryForm(ModelForm):
                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical'
             }),
             'category': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+        }
+
+class GrampanchayatBodiesForm(ModelForm):
+    class Meta:
+        model = GrampanchayatBodies
+        fields = ['name', 'position', 'photo']
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'position': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'photo': FileInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100'
+            }),
+        }
+
+class MaharastraOfficersForm(ModelForm):
+    class Meta:
+        model = MaharastraOfficers
+        fields = ['name', 'position', 'photo']
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'position': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'photo': FileInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100'
+            }),
+        }
+
+class TorsoleVillagePopulationForm(ModelForm):
+    class Meta:
+        model = TorsoleVillagePopulation
+        fields = ['from_year', 'to_year', 'vilage_name', 'family_count', 'population']
+        widgets = {
+            'from_year': NumberInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'to_year': NumberInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'vilage_name': TextInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'family_count': NumberInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+            }),
+            'population': NumberInput(attrs={
                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
             }),
         }

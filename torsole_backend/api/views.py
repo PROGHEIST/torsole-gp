@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from rest_framework import viewsets
 from .serializers import GramPanchayatInfoSerializer, SlideShowSerializer, AboutVillageSerializer, MissionSerializer, MissionObjectivesSerializer, ImportantLinksSerializer, GovernmentGRSerializer, DepartmentSerializer, GramPanchayatDocumentsSerializer, PhotoGallerySerializer
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery
-from .forms import GramPanchayatInfoForm, SlideShowForm, AboutVillageForm, MissionForm, MissionObjectivesForm, ImportantLinksForm, DepartmentForm, GovernmentGRForm, GramPanchayatDocumentsForm, PhotoGalleryForm
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation
+from .forms import GramPanchayatInfoForm, SlideShowForm, AboutVillageForm, MissionForm, MissionObjectivesForm, ImportantLinksForm, DepartmentForm, GovernmentGRForm, GramPanchayatDocumentsForm, PhotoGalleryForm, GrampanchayatBodiesForm, MaharastraOfficersForm, TorsoleVillagePopulationForm
 
 class GramPanchayatInfoViewSet(viewsets.ModelViewSet):
     serializer_class = GramPanchayatInfoSerializer
@@ -47,6 +47,18 @@ class PhotoGalleryViewset(viewsets.ModelViewSet):
     serializer_class = PhotoGallerySerializer
     queryset = PhotoGallery.objects.all()
 
+class GrampanchayatBodiesViewset(viewsets.ModelViewSet):
+    serializer_class = None  # Assuming no serializer yet, or add if needed
+    queryset = GrampanchayatBodies.objects.all()
+
+class MaharastraOfficersViewset(viewsets.ModelViewSet):
+    serializer_class = None
+    queryset = MaharastraOfficers.objects.all()
+
+class TorsoleVillagePopulationViewset(viewsets.ModelViewSet):
+    serializer_class = None
+    queryset = TorsoleVillagePopulation.objects.all()
+
 
 
 
@@ -81,6 +93,9 @@ def Dashboard(request):
     government_gr_count = GovernmentGR.objects.count()
     gp_documents_count = GramPanchayatDocuments.objects.count()
     photo_gallery_count = PhotoGallery.objects.count()
+    grampanchayat_bodies_count = GrampanchayatBodies.objects.count()
+    maharastra_officers_count = MaharastraOfficers.objects.count()
+    torsole_village_population_count = TorsoleVillagePopulation.objects.count()
 
     # Get latest items from each model
     latest_slideshow = SlideShow.objects.order_by('-updated_at').first()
@@ -92,6 +107,9 @@ def Dashboard(request):
     latest_government_gr = GovernmentGR.objects.order_by('-upload_date').first()
     latest_gp_document = GramPanchayatDocuments.objects.order_by('-upload_date').first()
     latest_photo_gallery = PhotoGallery.objects.order_by('-upload_date').first()
+    latest_grampanchayat_body = GrampanchayatBodies.objects.order_by('-updated_at').first()
+    latest_maharastra_officer = MaharastraOfficers.objects.order_by('-updated_at').first()
+    latest_torsole_population = TorsoleVillagePopulation.objects.order_by('-id').first()  # No date field, use -id
 
     context = {
         'user': user,
@@ -104,6 +122,9 @@ def Dashboard(request):
         'government_gr_count': government_gr_count,
         'gp_documents_count': gp_documents_count,
         'photo_gallery_count': photo_gallery_count,
+        'grampanchayat_bodies_count': grampanchayat_bodies_count,
+        'maharastra_officers_count': maharastra_officers_count,
+        'torsole_village_population_count': torsole_village_population_count,
         'latest_slideshow': latest_slideshow,
         'latest_about_village': latest_about_village,
         'latest_important_link': latest_important_link,
@@ -112,6 +133,10 @@ def Dashboard(request):
         'latest_department': latest_department,
         'latest_government_gr': latest_government_gr,
         'latest_gp_document': latest_gp_document,
+        'latest_photo_gallery': latest_photo_gallery,
+        'latest_grampanchayat_body': latest_grampanchayat_body,
+        'latest_maharastra_officer': latest_maharastra_officer,
+        'latest_torsole_population': latest_torsole_population,
     }
     return render(request, 'dashboard/dashboard.html', context)
 
@@ -518,3 +543,120 @@ def photo_gallery_delete(request, pk):
         messages.success(request, 'फोटो गॅलरी यशस्वीरित्या हटवली गेली!')
         return redirect('photo-gallery-list')
     return render(request, 'dashboard/photo_gallery_delete.html', {'photo_gallery': photo_gallery})
+
+@login_required(login_url='/admin/login/')
+def grampanchayat_bodies_list(request):
+    grampanchayat_bodies = GrampanchayatBodies.objects.all()
+    return render(request, 'dashboard/grampanchayat_bodies_list.html', {'grampanchayat_bodies': grampanchayat_bodies})
+
+@login_required(login_url='/admin/login/')
+def grampanchayat_bodies_create(request):
+    if request.method == 'POST':
+        form = GrampanchayatBodiesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ग्रामपंचायत सदस्य यशस्वीरित्या जोडला गेला!')
+            return redirect('grampanchayat-bodies-list')
+    else:
+        form = GrampanchayatBodiesForm()
+    return render(request, 'dashboard/grampanchayat_bodies_form.html', {'form': form, 'title': 'ग्रामपंचायत सदस्य जोडा'})
+
+@login_required(login_url='/admin/login/')
+def grampanchayat_bodies_update(request, pk):
+    grampanchayat_body = get_object_or_404(GrampanchayatBodies, pk=pk)
+    if request.method == 'POST':
+        form = GrampanchayatBodiesForm(request.POST, request.FILES, instance=grampanchayat_body)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ग्रामपंचायत सदस्य यशस्वीरित्या अपडेट केला गेला!')
+            return redirect('grampanchayat-bodies-list')
+    else:
+        form = GrampanchayatBodiesForm(instance=grampanchayat_body)
+    return render(request, 'dashboard/grampanchayat_bodies_form.html', {'form': form, 'title': 'ग्रामपंचायत सदस्य संपादित करा'})
+
+@login_required(login_url='/admin/login/')
+def grampanchayat_bodies_delete(request, pk):
+    grampanchayat_body = get_object_or_404(GrampanchayatBodies, pk=pk)
+    if request.method == 'POST':
+        grampanchayat_body.delete()
+        messages.success(request, 'ग्रामपंचायत सदस्य यशस्वीरित्या हटवला गेला!')
+        return redirect('grampanchayat-bodies-list')
+    return render(request, 'dashboard/grampanchayat_bodies_delete.html', {'grampanchayat_body': grampanchayat_body})
+
+@login_required(login_url='/admin/login/')
+def maharastra_officers_list(request):
+    maharastra_officers = MaharastraOfficers.objects.all()
+    return render(request, 'dashboard/maharastra_officers_list.html', {'maharastra_officers': maharastra_officers})
+
+@login_required(login_url='/admin/login/')
+def maharastra_officers_create(request):
+    if request.method == 'POST':
+        form = MaharastraOfficersForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'महाराष्ट्र अधिकारी यशस्वीरित्या जोडला गेला!')
+            return redirect('maharastra-officers-list')
+    else:
+        form = MaharastraOfficersForm()
+    return render(request, 'dashboard/maharastra_officers_form.html', {'form': form, 'title': 'महाराष्ट्र अधिकारी जोडा'})
+
+@login_required(login_url='/admin/login/')
+def maharastra_officers_update(request, pk):
+    maharastra_officer = get_object_or_404(MaharastraOfficers, pk=pk)
+    if request.method == 'POST':
+        form = MaharastraOfficersForm(request.POST, request.FILES, instance=maharastra_officer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'महाराष्ट्र अधिकारी यशस्वीरित्या अपडेट केला गेला!')
+            return redirect('maharastra-officers-list')
+    else:
+        form = MaharastraOfficersForm(instance=maharastra_officer)
+    return render(request, 'dashboard/maharastra_officers_form.html', {'form': form, 'title': 'महाराष्ट्र अधिकारी संपादित करा'})
+
+@login_required(login_url='/admin/login/')
+def maharastra_officers_delete(request, pk):
+    maharastra_officer = get_object_or_404(MaharastraOfficers, pk=pk)
+    if request.method == 'POST':
+        maharastra_officer.delete()
+        messages.success(request, 'महाराष्ट्र अधिकारी यशस्वीरित्या हटवला गेला!')
+        return redirect('maharastra-officers-list')
+    return render(request, 'dashboard/maharastra_officers_delete.html', {'maharastra_officer': maharastra_officer})
+
+@login_required(login_url='/admin/login/')
+def torsole_village_population_list(request):
+    torsole_village_populations = TorsoleVillagePopulation.objects.all()
+    return render(request, 'dashboard/torsole_village_population_list.html', {'torsole_village_populations': torsole_village_populations})
+
+@login_required(login_url='/admin/login/')
+def torsole_village_population_create(request):
+    if request.method == 'POST':
+        form = TorsoleVillagePopulationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'गाव लोकसंख्या यशस्वीरित्या जोडली गेली!')
+            return redirect('torsole-village-population-list')
+    else:
+        form = TorsoleVillagePopulationForm()
+    return render(request, 'dashboard/torsole_village_population_form.html', {'form': form, 'title': 'गाव लोकसंख्या जोडा'})
+
+@login_required(login_url='/admin/login/')
+def torsole_village_population_update(request, pk):
+    torsole_village_population = get_object_or_404(TorsoleVillagePopulation, pk=pk)
+    if request.method == 'POST':
+        form = TorsoleVillagePopulationForm(request.POST, instance=torsole_village_population)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'गाव लोकसंख्या यशस्वीरित्या अपडेट केली गेली!')
+            return redirect('torsole-village-population-list')
+    else:
+        form = TorsoleVillagePopulationForm(instance=torsole_village_population)
+    return render(request, 'dashboard/torsole_village_population_form.html', {'form': form, 'title': 'गाव लोकसंख्या संपादित करा'})
+
+@login_required(login_url='/admin/login/')
+def torsole_village_population_delete(request, pk):
+    torsole_village_population = get_object_or_404(TorsoleVillagePopulation, pk=pk)
+    if request.method == 'POST':
+        torsole_village_population.delete()
+        messages.success(request, 'गाव लोकसंख्या यशस्वीरित्या हटवली गेली!')
+        return redirect('torsole-village-population-list')
+    return render(request, 'dashboard/torsole_village_population_delete.html', {'torsole_village_population': torsole_village_population})
