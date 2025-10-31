@@ -51,4 +51,13 @@ export class Api {
   getGPBodiesData(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/grampanchayat-bodies`)
   }
+
+  getMahaOfficersData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/maharastra-officers`)
+  }
+
+  getVillagePopulationData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/torsole-village-population`)
+  }
+
 }

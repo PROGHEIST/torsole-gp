@@ -19,6 +19,8 @@ import { GpDocuments } from './gp-documents/gp-documents';
 import { GpPhotos } from './gp-photos/gp-photos';
 import { GpBodies } from './components/gp-bodies/gp-bodies';
 import { GpEmployee } from './gp-employee/gp-employee';
+import { MahaOfficers } from './components/maha-officers/maha-officers';
+import { VillagePopulation } from './components/village-population/village-population';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { GpEmployee } from './gp-employee/gp-employee';
     MapLocation,
     GpDocuments,
     GpPhotos,
-    GpEmployee
+    GpEmployee,
+    MahaOfficers,
+    VillagePopulation
   ],
   imports: [
     BrowserModule,

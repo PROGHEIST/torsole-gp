@@ -1,8 +1,6 @@
-# TODO for GP Bodies Component Updates
+# TODO: Remove Population Chart from Village Population Component
 
-- [x] Update gp-bodies.ts to add loading state variable and set it to false after data loads.
-- [x] Update gp-bodies.html to add skeleton loading placeholders when loading is true, and modify cards to be smaller with circular images.
-- [x] Update gp-bodies.css to add styles for skeleton placeholders if needed.
-- [x] Test the component to ensure loading state works and cards display correctly.
-- [x] Remove the "अधिक माहिती" (More Info) button from gp-bodies.html
-- [x] Update the position paragraph styling in gp-bodies.html to make it bold and green for highlighting
+- [x] Edit src/app/components/village-population/village-population.html to remove the chart section (the div containing the canvas and related elements)
+- [x] Edit src/app/components/village-population/village-population.ts to remove Chart.js imports, chart property, createChart method, and ngAfterViewInit method
+- [x] Check if Chart.js is used elsewhere in the project; if not, remove it from package.json
+- [ ] Run the app to verify the component displays stats and table without the chart
