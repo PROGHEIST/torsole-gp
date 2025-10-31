@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation
 
 class GramPanchayatInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,4 +51,19 @@ class GramPanchayatDocumentsSerializer(serializers.ModelSerializer):
 class PhotoGallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = PhotoGallery
+        fields = '__all__'
+
+class GrampanchayatBodiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GrampanchayatBodies
+        fields = '__all__'
+
+class MaharastraOfficersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaharastraOfficers
+        fields = '__all__'
+
+class TorsoleVillagePopulationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TorsoleVillagePopulation
         fields = '__all__'

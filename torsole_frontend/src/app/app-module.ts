@@ -5,11 +5,10 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Navbar } from './components/navbar/navbar';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Footer } from './components/footer/footer';
 import { Home } from './home/home';
 import { Slideshow } from './components/slideshow/slideshow';
-import { GpBodies } from './components/gp-bodies/gp-bodies';
 import { Mission } from './mission/mission';
 import { OurMission } from './components/our-mission/our-mission';
 import { ImpLinks } from './components/imp-links/imp-links';
@@ -18,6 +17,8 @@ import { GovernmentGr } from './government-gr/government-gr';
 import { FormsModule } from '@angular/forms';
 import { GpDocuments } from './gp-documents/gp-documents';
 import { GpPhotos } from './gp-photos/gp-photos';
+import { GpBodies } from './components/gp-bodies/gp-bodies';
+import { GpEmployee } from './gp-employee/gp-employee';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { GpPhotos } from './gp-photos/gp-photos';
     ImpLinks,
     MapLocation,
     GpDocuments,
-    GpPhotos
+    GpPhotos,
+    GpEmployee
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { GpPhotos } from './gp-photos/gp-photos';
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+    DatePipe
   ],
   bootstrap: [App]
 })

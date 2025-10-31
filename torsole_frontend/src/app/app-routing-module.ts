@@ -5,6 +5,8 @@ import { Mission } from './mission/mission';
 import { GovernmentGr } from './government-gr/government-gr';
 import { GpDocuments } from './gp-documents/gp-documents';
 import { GpPhotos } from './gp-photos/gp-photos';
+import { GpEmployee } from './gp-employee/gp-employee';
+
 
 const routes: Routes = [
   {path: '', component: Home},
@@ -12,6 +14,8 @@ const routes: Routes = [
   {path: 'government-grs', component: GovernmentGr},
   {path: 'gp-documents', component: GpDocuments},
   {path: 'photo-gallery', component: GpPhotos},
+  {path: 'gp-bodies', component: GpEmployee},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

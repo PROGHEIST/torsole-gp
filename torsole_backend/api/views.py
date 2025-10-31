@@ -3,13 +3,25 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from rest_framework import viewsets
-from .serializers import GramPanchayatInfoSerializer, SlideShowSerializer, AboutVillageSerializer, MissionSerializer, MissionObjectivesSerializer, ImportantLinksSerializer, GovernmentGRSerializer, DepartmentSerializer, GramPanchayatDocumentsSerializer, PhotoGallerySerializer
-from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation
+from .serializers import GramPanchayatInfoSerializer, SlideShowSerializer, AboutVillageSerializer, MissionSerializer, MissionObjectivesSerializer, ImportantLinksSerializer, GovernmentGRSerializer, DepartmentSerializer, GramPanchayatDocumentsSerializer, PhotoGallerySerializer, GrampanchayatBodiesSerializer, MaharastraOfficersSerializer, TorsoleVillagePopulationSerializer
+from .models import GramPanchayatInfo, SlideShow, AboutVillage, Mission, MissionObjectives, ImportantLinks, GovernmentGR, Department, GramPanchayatDocuments, PhotoGallery, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation, GrampanchayatBodies, MaharastraOfficers, TorsoleVillagePopulation
 from .forms import GramPanchayatInfoForm, SlideShowForm, AboutVillageForm, MissionForm, MissionObjectivesForm, ImportantLinksForm, DepartmentForm, GovernmentGRForm, GramPanchayatDocumentsForm, PhotoGalleryForm, GrampanchayatBodiesForm, MaharastraOfficersForm, TorsoleVillagePopulationForm
 
 class GramPanchayatInfoViewSet(viewsets.ModelViewSet):
     serializer_class = GramPanchayatInfoSerializer
     queryset = GramPanchayatInfo.objects.all()
+
+class GrampanchayatBodiesViewSet(viewsets.ModelViewSet):
+    serializer_class = GrampanchayatBodiesSerializer
+    queryset = GrampanchayatBodies.objects.all()
+
+class MaharastraOfficersViewSet(viewsets.ModelViewSet):
+    serializer_class = MaharastraOfficersSerializer
+    queryset = MaharastraOfficers.objects.all()
+
+class TorsoleVillagePopulationViewSet(viewsets.ModelViewSet):
+    serializer_class = TorsoleVillagePopulationSerializer
+    queryset = TorsoleVillagePopulation.objects.all()
 
 class SlideShowViewSet(viewsets.ModelViewSet):
     serializer_class = SlideShowSerializer

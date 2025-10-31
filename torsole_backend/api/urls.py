@@ -2,11 +2,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset, MissionViewSet, MissionObjectivesViewSet, ImportantLinksViewset, GovernmentGRViewset, DepartmentViewset, GramPanchayatDocumentsViewset, PhotoGalleryViewset, GrampanchayatBodiesViewset, MaharastraOfficersViewset, TorsoleVillagePopulationViewset
+from .views import GramPanchayatInfoViewSet, SlideShowViewSet, AboutVillageViewset, MissionViewSet, MissionObjectivesViewSet, ImportantLinksViewset, GovernmentGRViewset, DepartmentViewset, GramPanchayatDocumentsViewset, PhotoGalleryViewset, GrampanchayatBodiesViewSet, MaharastraOfficersViewSet, TorsoleVillagePopulationViewSet
 from . import views
 
 router = routers.DefaultRouter()
 router.register('gpinfo', GramPanchayatInfoViewSet)
+router.register('grampanchayat-bodies', GrampanchayatBodiesViewSet)
+router.register('maharastra-officers', MaharastraOfficersViewSet)
+router.register('torsole-village-population', TorsoleVillagePopulationViewSet)
 router.register('slideshow', SlideShowViewSet)
 router.register('about-village', AboutVillageViewset)
 router.register('missions', MissionViewSet)
@@ -16,9 +19,6 @@ router.register('goverment-grs', GovernmentGRViewset)
 router.register('gr-departments', DepartmentViewset)
 router.register('gp-documents', GramPanchayatDocumentsViewset)
 router.register('photo-gallery', PhotoGalleryViewset)
-router.register('grampanchayat-bodies', GrampanchayatBodiesViewset)
-router.register('maharastra-officers', MaharastraOfficersViewset)
-router.register('torsole-village-population', TorsoleVillagePopulationViewset)
 
 urlpatterns = [
     path('', include(router.urls)),

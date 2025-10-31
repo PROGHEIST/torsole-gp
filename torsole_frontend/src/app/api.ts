@@ -47,4 +47,8 @@ export class Api {
   getPhotoGalleryData(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/photo-gallery`)
   }
+
+  getGPBodiesData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/grampanchayat-bodies`)
+  }
 }
